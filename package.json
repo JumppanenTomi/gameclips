@@ -1,0 +1,19 @@
+{
+  "name": "gameclips",
+  "version": "1.0.0",
+  "description": "BCWT team project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JumppanenTomi/gameclips.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JumppanenTomi/gameclips/issues"
+  },
+  "homepage": "https://github.com/JumppanenTomi/gameclips#readme"
+}
