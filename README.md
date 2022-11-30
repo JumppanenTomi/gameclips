@@ -1,2 +1,0 @@
-# gameclips
- BCWT team project
