@@ -2,9 +2,9 @@
 const pool=require('../database/db');
 const promisePool=pool.promise();
 
-const getAll=async (res) => {
+const getHundred=async (res) => {
     try {
-        const sql='SELECT * FROM games ';
+        const sql='SELECT id, name FROM games';
         const [rows]=await promisePool.query(sql);
         return rows;
     } catch (e) {
@@ -13,4 +13,4 @@ const getAll=async (res) => {
     }
 };
 
-module.exports={ getAll };
+module.exports={ getHundred };

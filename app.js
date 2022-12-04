@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 //routes that anonymous people can access
 app.use('/clips', clipRoutes);
 app.use('/browse', browseRoutes);
+app.use('/comments', commentRoutes);
 
 
 //routes that only logged-in users can access
