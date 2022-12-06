@@ -25,6 +25,12 @@ const deleteCommentByCommentId=async (req, res) => {
     res.json(response);
 };
 
+const modifyCommentByCommentId=async (req, res) => {
+    const userId=1//muutetaan, kun kirjatuminen valmis
+    const response=await model.modifyCommentByCommentId(req.params.comment, req.params.commentId, userId, res);
+    res.json(response);
+};
+
 module.exports={
-    getCommentsByClipId, getCommentsByUserId, addCommentToClipById, deleteCommentByCommentId
+    getCommentsByClipId, getCommentsByUserId, addCommentToClipById, deleteCommentByCommentId, modifyCommentByCommentId
 };

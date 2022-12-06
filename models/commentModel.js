@@ -54,4 +54,20 @@ const deleteCommentByCommentId=async (userId, commentId, res) => {
     }
 };
 
-module.exports={ getCommentsByClipId, getCommentsByUserId, addCommentToClipById, deleteCommentByCommentId };
+const modifyCommentByCommentId=async (comment, commentId, userId, res) => {
+    try {
+        const sql='update comments set comment = ? where id = ? and userId = ?';
+        const values=[comment, commentId, userId];
+        const [rows]=await promisePool.query(sql, values);
+        if (rows.affectedRows>0) {
+            return "Comment modified";
+        } else {
+            return "Something went wrong"
+        }
+    } catch (e) {
+        console.error("error", e.message);
+        res.status(500).send(e.message);
+    }
+};
+
+module.exports={ getCommentsByClipId, getCommentsByUserId, addCommentToClipById, deleteCommentByCommentId, modifyCommentByCommentId };
