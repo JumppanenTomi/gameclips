@@ -1,8 +1,8 @@
 'use strict';
-const Model=require('../models/browseModel')
+const model=require('../models/browseModel')
 
 const getHundred=async (req, res) => {
-    const videos=await Model.getHundred(res);
+    const videos=await model.getHundred(res);
     res.json(videos);
 };
 
