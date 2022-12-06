@@ -17,6 +17,10 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use('/static', express.static('public'))
 
+app.get('/', function (req, res) {
+    res.redirect('https://github.com/JumppanenTomi/gameclips-backend/tree/main');
+});
+
 //routes that anonymous people can access
 app.use('/clips', clipRoutes);
 app.use('/browse', browseRoutes);
