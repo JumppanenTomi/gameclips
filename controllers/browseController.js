@@ -1,11 +1,11 @@
 'use strict';
 const model=require('../models/browseModel')
 
-const getHundred=async (req, res) => {
-    const videos=await model.getHundred(res);
-    res.json(videos);
+const getAll=async (req, res) => {
+    const response=await model.getAll(res);
+    res.json(response);
 };
 
 module.exports={
-    getHundred,
+    getAll,
 };

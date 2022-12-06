@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/popup-styles.css">
+    <title>GameClips - Home</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="site-logo">GameClips</h1>
+        <nav class="menu guest-main">
+            <ul>
+                <li><a class="active" href="">Home</a></li>
+                <li><a href="">Browse</a></li>
+            </ul>
+        </nav>
+        <nav class="menu logged-in-main">
+            <ul>
+                <li><a class="active" href="">Home</a></li>
+                <li><a href="">Browse</a></li>
+                <li><a href="">Favorites</a></li>
+                <li><a href="#upload-clip">Upload own clip</a></li>
+            </ul>
+        </nav>
+        <nav class="menu guest-registration">
+            <ul>
+                <li><a href="" class="btn-highlight">Register</a></li>
+                <li><a href="">Login</a></li>
+            </ul>
+        </nav>
+        <nav class="menu logged-in-account">
+            <ul>
+                <li><a href="">Account</a></li>
+                <li><a href="">Log-out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <aside class="side-panel">
+        <h2 id="hello-message">Welcome, Stranger</h2>
+        <h3>Trending games</h3>
+        <ul class="trending-games">
+            <li><img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg" alt="game cover">
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <article class="clip-post">
+            <h2>Insane cache clip</h2>
+            <p>U dont wanna miss this</p>
+            <div class="posted-by">
+                <img src="https://wallpapers.com/images/hd/cool-neon-blue-profile-picture-u9y9ydo971k9mdcf.jpg"
+                    alt="user profile picture">
+                <label>Tomi Jumppanen</label>
+            </div>
+            <video width="0" controls>
+                <source src="./media/1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </article>
+    </main>
+    <script src="./scripts/getData.js"></script>
+</body>
+
+</html>

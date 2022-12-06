@@ -8,4 +8,9 @@ router.get('/clip/:id', controller.getCommentsByClipId);
 
 router.get('/user/:id', controller.getCommentsByUserId);
 
+router.post('/:clipId/:comment', controller.addCommentToClipById);
+
+router.patch('/:commentId/:comment', controller.modifyCommentByCommentId);
+
+router.delete('/:commentId', controller.deleteCommentByCommentId);
 module.exports=router;

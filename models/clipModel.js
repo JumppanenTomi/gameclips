@@ -2,10 +2,10 @@
 const pool=require('../database/db');
 const promisePool=pool.promise();
 
-const getAnyClip=async (res) => {
+const getRandomQuery=async () => {
     try {
-        const sql='SELECT user.username, clips.id, clips.title, clips.description, clips.url FROM user, clips WHERE user.id = clips.userId ORDER BY RAND() LIMIT 3;';
-        const [rows]=await promisePool.query(sql);
+        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId ORDER BY RAND() LIMIT 3;';
+        const [rows]=await promisePool.query(sql)
         return rows;
     } catch (e) {
         console.error("error", e.message);
@@ -26,5 +26,5 @@ const uploadClip=async (userId, data, file, res) => {
 };
 
 module.exports={
-    getAnyClip, uploadClip
+    getRandomQuery, uploadClip
 };
