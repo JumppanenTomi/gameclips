@@ -9,7 +9,6 @@ const port=3000;
 const clipRoutes=require('./routes/clipRoutes');
 const browseRoutes=require('./routes/browseRoutes');
 const commentRoutes=require('./routes/commentRoutes');
-const insertRoutes=require('./routes/uploadRoutes');
 const profileRoutes=require('./routes/profileRoutes');
 
 app.use(cors())
@@ -21,18 +20,10 @@ app.get('/', function (req, res) {
     res.redirect('https://github.com/JumppanenTomi/gameclips-backend/tree/main');
 });
 
-//routes that anonymous people can access
-app.use('/clips', clipRoutes);
+app.use('/clip', clipRoutes);
 app.use('/browse', browseRoutes);
 app.use('/comment', commentRoutes);
 app.use('/profile', profileRoutes);
 
-
-//routes that only logged-in users can access
-app.use('/upload/', insertRoutes);
-
-//routes that only moderators can access
-
-//routes that only admin can access
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

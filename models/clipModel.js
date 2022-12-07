@@ -1,7 +1,7 @@
 'use strict';
 const pool=require('../database/db');
 const promisePool=pool.promise();
-const fs=require('../utils/fileDeletion')
+const file=require('../utils/file')
 
 const getRandomQuery=async () => {
     try {
@@ -32,7 +32,7 @@ const deleteClip=async (userId, data, res) => {
         let sql='SELECT * FROM clips WHERE id=? and userId=?;'
         const values=[data.id, userId];
         const [rows1]=await promisePool.query(sql, values);
-        fs.deleteAsync("./public/"+rows1[0].url)//..deleting file from public folder
+        file.deleteAsync("./public/"+rows1[0].url)//..deleting file from public folder
 
         //deleting all comments that are depending on this clip
         sql='DELETE FROM comments WHERE clipId=?;'
