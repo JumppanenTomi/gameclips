@@ -15,6 +15,7 @@ const getCommentsByUserId=async (req, res) => {
 
 const addCommentToClipById=async (req, res) => {
     const userId=1//muutetaan, kun kirjatuminen valmis
+
     const data=req.body
     const response=await model.addCommentToClipById(userId, data, res);
     res.json(response);
@@ -22,6 +23,7 @@ const addCommentToClipById=async (req, res) => {
 
 const deleteCommentByCommentId=async (req, res) => {
     const userId=1//muutetaan, kun kirjatuminen valmis
+
     const data=req.body
     const response=await model.deleteCommentByCommentId(userId, data, res);
     res.json(response);
@@ -29,8 +31,9 @@ const deleteCommentByCommentId=async (req, res) => {
 
 const modifyCommentByCommentId=async (req, res) => {
     const userId=1//muutetaan, kun kirjatuminen valmis
+
     const data=req.body
-    const response=await model.modifyCommentByCommentId(data, userId, res);
+    const response=await model.modifyCommentByCommentId(userId, data, res);
     res.json(response);
 };
 

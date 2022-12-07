@@ -54,7 +54,7 @@ const deleteCommentByCommentId=async (userId, data, res) => {
     }
 };
 
-const modifyCommentByCommentId=async (data, userId, res) => {
+const modifyCommentByCommentId=async (userId, data, res) => {
     try {
         const sql='update comments set comment = ? where id = ? and userId = ?';
         const values=[data.comment, data.id, userId];
