@@ -2,7 +2,7 @@
 const model=require('../models/clipModel')
 
 
-const getRandomQuery=async (res) => {
+const getRandomQuery=async (req, res) => {
     res.json(await model.getRandomQuery(res));
 };
 
