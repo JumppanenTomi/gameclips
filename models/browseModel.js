@@ -13,4 +13,16 @@ const getAll=async (res) => {
     }
 };
 
-module.exports={ getAll };
+const search=async (data, res) => {
+    try {
+        const sql="SELECT * FROM games WHERE name LIKE ?;";
+        const values=["%"+data.term+"%"];
+        const [rows]=await promisePool.query(sql, values);
+        return rows;
+    } catch (e) {
+        console.error("error", e.message);
+        res.status(500).send(e.message);
+    }
+};
+
+module.exports={ getAll, search };
