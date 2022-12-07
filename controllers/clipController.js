@@ -7,8 +7,10 @@ const getRandomQuery=async (req, res) => {
 };
 
 const uploadClip=async (req, res) => {
+    const userId=1//muutetaan, kun kirjatuminen valmis
+    const data=req.body
     if (req.file!=undefined) {
-        const response=await model.uploadClip(1, req.params, req.file.filename, res);
+        const response=await model.uploadClip(userId, data, req.file.filename, res);
         res.json(response);
     } else {
         res.status(400).send('There was no file');
@@ -16,8 +18,9 @@ const uploadClip=async (req, res) => {
 };
 
 const deleteClip=async (req, res) => {
-    const userId=1//muutetaan, kun kirjatuminen valmis
-    res.json(await model.deleteClip(userId, req.params.clipId, res));
+    const userId=1;//muutetaan, kun kirjatuminen valmis
+    const data=req.body;
+    res.json(await model.deleteClip(userId, data, res));
 };
 
 module.exports={

@@ -26,7 +26,7 @@ let upload=multer({
     }, limits: { fileSize: 50000000 }
 })
 
-router.post('/clip/:title/:desc/', upload.single('clip'), controller.uploadClip);
+router.post('/clip/', upload.single('clip'), controller.uploadClip);
 
 
 module.exports=router;

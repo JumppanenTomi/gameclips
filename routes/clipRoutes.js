@@ -5,6 +5,5 @@ const controller=require('../controllers/clipController')
 
 router.get('/getRandomQuery', controller.getRandomQuery);
 
-
-router.delete('/deleteClip/:clipId', controller.deleteClip)
+router.delete('/deleteClip/', controller.deleteClip)
 module.exports=router;

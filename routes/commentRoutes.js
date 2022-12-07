@@ -4,13 +4,13 @@ const router=express.Router();
 const path=require('path');
 const controller=require('../controllers/commentController')
 
-router.get('/clip/:id', controller.getCommentsByClipId);
+router.get('/clip', controller.getCommentsByClipId);
 
-router.get('/user/:id', controller.getCommentsByUserId);
+router.get('/user', controller.getCommentsByUserId);
 
-router.post('/:clipId/:comment', controller.addCommentToClipById);
+router.post('/', controller.addCommentToClipById);
 
-router.patch('/:commentId/:comment', controller.modifyCommentByCommentId);
+router.patch('/', controller.modifyCommentByCommentId);
 
-router.delete('/:commentId', controller.deleteCommentByCommentId);
+router.delete('/', controller.deleteCommentByCommentId);
 module.exports=router;

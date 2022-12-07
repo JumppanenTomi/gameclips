@@ -2,7 +2,8 @@
 const model=require('../models/profileModel')
 
 const getUserProfileById=async (req, res) => {
-    res.json(await model.getUserProfileById(req.params.id, res));
+    const data=req.body
+    res.json(await model.getUserProfileById(data, res));
 };
 
 module.exports={

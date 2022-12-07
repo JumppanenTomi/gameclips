@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 //routes that anonymous people can access
 app.use('/clips', clipRoutes);
 app.use('/browse', browseRoutes);
-app.use('/comments', commentRoutes);
+app.use('/comment', commentRoutes);
 app.use('/profile', profileRoutes);
 
 

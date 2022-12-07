@@ -5,7 +5,7 @@ const fs=require('../utils/fileDeletion')
 
 const getRandomQuery=async () => {
     try {
-        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId ORDER BY RAND() LIMIT 3;';
+        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId ORDER BY RAND() LIMIT 100;';
         const [rows]=await promisePool.query(sql)
         return rows;
     } catch (e) {
@@ -26,17 +26,17 @@ const uploadClip=async (userId, data, file, res) => {
     }
 };
 
-const deleteClip=async (userId, clipId, res) => {
+const deleteClip=async (userId, data, res) => {
     try {
         //getting clip url so we know which file to delete...
-        let sql='SELECT url FROM clips WHERE id=? and userId=?;'
-        const values=[clipId, userId];
+        let sql='SELECT * FROM clips WHERE id=? and userId=?;'
+        const values=[data.id, userId];
         const [rows1]=await promisePool.query(sql, values);
         fs.deleteAsync("./public/"+rows1[0].url)//..deleting file from public folder
 
         //deleting all comments that are depending on this clip
         sql='DELETE FROM comments WHERE clipId=?;'
-        const deleteValues=[clipId];
+        const deleteValues=[data.id];
         const [rows2]=await promisePool.query(sql, deleteValues);
 
         //deleting all likes that are depending on this clip

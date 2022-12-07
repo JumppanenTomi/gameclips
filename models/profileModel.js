@@ -2,10 +2,10 @@
 const pool=require('../database/db');
 const promisePool=pool.promise();
 
-const getUserProfileById=async (userId, res) => {
+const getUserProfileById=async (data, res) => {
     try {
         let sql='SELECT id, username FROM users WHERE id = ?;';
-        const values=[userId];
+        const values=[data.id];
         const [rowsUser]=await promisePool.query(sql, values);
 
         sql='SELECT id, title, description, url FROM clips WHERE userId = ?;';
