@@ -1,6 +1,5 @@
 'use strict';
 const express=require('express');
-const session=require('express-session');
 const app=express();
 const cors=require('cors');
 
@@ -26,4 +25,4 @@ app.use('/comment', commentRoutes);
 app.use('/profile', profileRoutes);
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}!`));

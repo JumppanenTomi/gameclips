@@ -26,5 +26,5 @@ const deleteClip=async (req, res) => {
 };
 
 module.exports={
-    getRandomQuery, uploadClip, deleteClip
+    getRandomQuery, uploadClip, deleteClip,
 };

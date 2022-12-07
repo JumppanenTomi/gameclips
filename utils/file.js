@@ -13,16 +13,16 @@ function deleteAsync(file) {
 
 let upload=multer({
     storage: multer.diskStorage({
-        destination: function (cb) {
+        destination: function (req, file, cb) {
             cb(null, 'public')
         },
-        filename: function (cb) {
+        filename: function (req, file, cb) {
             let extArray=file.mimetype.split("/");
             let extension=extArray[extArray.length-1];
             cb(null, Date.now()+'-'+file.originalname)
         },
     }),
-    fileFilter: function (file, cb) {
+    fileFilter: function (req, file, cb) {
         var ext=path.extname(file.originalname);
         if (ext!=='.mp4'&&ext!=='.avi') {
             return cb(new Error('Only .mp4 and AVI are supported'))
