@@ -1,2 +1,2 @@
 # gameclips-backend
-BCWT team project
+## Guide coming soon
