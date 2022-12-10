@@ -9,39 +9,39 @@ const getCommentsByClipId=async (data, res) => {
         const [rows]=await promisePool.query(sql, values);
         return rows;
     } catch (e) {
-        console.error("error", e.message);
+        console.error("comment error", e.message);
         res.status(500).send(e.message);
     }
 };
 
-const getCommentsByUserId=async (data, res) => {
+const getCommentsByUserId=async (user, res) => {
     try {
         const sql='SELECT comments.comment, users.username FROM comments, users WHERE comments.userId = ?';
-        const values=[data.id]
+        const values=[user.id]
         const [rows]=await promisePool.query(sql, values);
         return rows;
     } catch (e) {
-        console.error("error", e.message);
+        console.error("comment error", e.message);
         res.status(500).send(e.message);
     }
 };
 
-const addCommentToClipById=async (userId, data, res) => {
+const addCommentToClipById=async (user, data, res) => {
     try {
         const sql='insert into comments (comment, userId, clipId) VALUES (?, ?, ?);';
-        const values=[data.comment, userId, data.id];
+        const values=[data.comment, user.id, data.id];
         const [rows]=await promisePool.query(sql, values);
         return "Comment posted";
     } catch (e) {
-        console.error("error", e.message);
+        console.error("comment error", e.message);
         res.status(500).send(e.message);
     }
 };
 
-const deleteCommentByCommentId=async (userId, data, res) => {
+const deleteCommentByCommentId=async (user, data, res) => {
     try {
         const sql='DELETE FROM comments WHERE id=? and userId=?;';
-        const values=[data.id, userId];
+        const values=[data.id, user.id];
         const [rows]=await promisePool.query(sql, values);
         if (rows.affectedRows>0) {
             return "Comment deleted";
@@ -49,15 +49,15 @@ const deleteCommentByCommentId=async (userId, data, res) => {
             return "Something went wrong"
         }
     } catch (e) {
-        console.error("error", e.message);
+        console.error("comment error", e.message);
         res.status(500).send(e.message);
     }
 };
 
-const modifyCommentByCommentId=async (userId, data, res) => {
+const modifyCommentByCommentId=async (user, data, res) => {
     try {
         const sql='update comments set comment = ? where id = ? and userId = ?';
-        const values=[data.comment, data.id, userId];
+        const values=[data.comment, data.id, user.id];
         const [rows]=await promisePool.query(sql, values);
         if (rows.affectedRows>0) {
             return "Comment modified";
@@ -65,7 +65,7 @@ const modifyCommentByCommentId=async (userId, data, res) => {
             return "Something went wrong"
         }
     } catch (e) {
-        console.error("error", e.message);
+        console.error("comment error", e.message);
         res.status(500).send(e.message);
     }
 };

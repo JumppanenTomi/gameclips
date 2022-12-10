@@ -8,32 +8,30 @@ const getCommentsByClipId=async (req, res) => {
 };
 
 const getCommentsByUserId=async (req, res) => {
-    const data=req.body
-    const response=await model.getCommentsByUserId(data, res);
+    const user=req.user;
+    const data=req.body;
+    const response=await model.getCommentsByUserId(user, res);
     res.json(response);
 };
 
 const addCommentToClipById=async (req, res) => {
-    const userId=1//muutetaan, kun kirjatuminen valmis
-
+    const user=req.user;
     const data=req.body
-    const response=await model.addCommentToClipById(userId, data, res);
+    const response=await model.addCommentToClipById(user, data, res);
     res.json(response);
 };
 
 const deleteCommentByCommentId=async (req, res) => {
-    const userId=1//muutetaan, kun kirjatuminen valmis
-
+    const user=req.user;
     const data=req.body
-    const response=await model.deleteCommentByCommentId(userId, data, res);
+    const response=await model.deleteCommentByCommentId(user, data, res);
     res.json(response);
 };
 
 const modifyCommentByCommentId=async (req, res) => {
-    const userId=1//muutetaan, kun kirjatuminen valmis
-
+    const user=req.user;
     const data=req.body
-    const response=await model.modifyCommentByCommentId(userId, data, res);
+    const response=await model.modifyCommentByCommentId(user, data, res);
     res.json(response);
 };
 

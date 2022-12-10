@@ -1,67 +1,34 @@
 "use strict";
-const passport=require('passport');
-const Strategy=require('passport-local').Strategy;
+const passport=require("passport");
+const Strategy=require("passport-local").Strategy;
 const passportJWT=require("passport-jwt");
 const JWTStrategy=passportJWT.Strategy;
 const ExtractJWT=passportJWT.ExtractJwt;
+const bcryptjs=require('bcryptjs');
+const { getUserLogin }=require("../models/userModel");
 require('dotenv').config();
 
-// fake database: ****************
-const users=[
-    {
-        user_id: 1,
-        name: "Foo Bar",
-        email: "foo@bar.fi",
-        password: "foobar",
-    },
-    {
-        user_id: 2,
-        name: "Bar Foo",
-        email: "bar@foo.fi",
-        password: "barfoo",
-    },
-];
-// *******************
-
-// fake database functions *********
-const getUser=(id) => {
-    const user=users.filter((usr) => {
-        if (usr.user_id===id) {
-            return usr;
+// local strategy for username password login
+passport.use(
+    new Strategy(async (username, password, done) => {
+        const params=[username];
+        try {
+            const [user]=await getUserLogin(params);
+            console.log("Local strategy", user); // result is binary row
+            if (user===undefined) {
+                return done(null, false, { message: "Incorrect email." });
+            }
+            if (!bcryptjs.compareSync(password, user.password)) { // passwords dont match
+                return done(null, false);
+            }
+            return done(null, { ...user }, { message: "Logged In Successfully" }); // use spread syntax to create shallow copy to get rid of binary row type
+        } catch (err) {
+            return done(err);
         }
-    });
-    return user[0];
-};
+    })
+);
 
-const getUserLogin=(email) => {
-    const user=users.filter((usr) => {
-        if (usr.email===email) {
-            return usr;
-        }
-    });
-    return user[0];
-};
-
-// serialize: store user id in session
-passport.serializeUser((id, done) => {
-    process.nextTick(function () {
-        return done(null, {
-            id: id,
-            name: getUserid(id).name,
-            email: getUserid(id).email
-        });
-    });
-});
-
-// deserialize: get user id from session and get all user data
-passport.deserializeUser(async (id, done) => {
-    console.log("deserialize", user);
-    process.nextTick(function () {
-        return done(null, getUser(id));
-    });
-});
-
-passport.use('local', new JWTStrategy({
+passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET
 },

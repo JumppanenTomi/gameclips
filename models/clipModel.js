@@ -9,29 +9,29 @@ const getRandomQuery=async () => {
         const [rows]=await promisePool.query(sql)
         return rows;
     } catch (e) {
-        console.error("error", e.message);
+        console.error("clip error", e.message);
         res.status(500).send(e.message);
     }
 };
 
-const uploadClip=async (userId, data, file, res) => {
+const uploadClip=async (user, data, file, res) => {
     try {
         const sql='insert into clips (userId, title, description, url) VALUES (?, ?, ?, ?);';
-        const values=[userId, data.title, data.desc, file];
+        const values=[user.id, data.title, data.desc, file];
         const [rows]=await promisePool.query(sql, values);
         return "Successfully uploaded";
     } catch (e) {
-        console.error("error", e.message);
+        console.error("clip error", e.message);
         res.status(500).send(e.message);
     }
 };
 
 
-const deleteClip=async (userId, data, res) => {
+const deleteClip=async (user, data, res) => {
     try {
         //getting clip url so we know which file to delete...
         let sql='SELECT * FROM clips WHERE id=? and userId=?;'
-        const values=[data.id, userId];
+        const values=[data.id, user.id];
         const [rows1]=await promisePool.query(sql, values);
         file.deleteAsync("./public/"+rows1[0].url)//..deleting file from public folder
 
@@ -58,7 +58,7 @@ const deleteClip=async (userId, data, res) => {
             return "Something went wrong"
         }
     } catch (e) {
-        console.error("error", e.message);
+        console.error("clip error", e.message);
         res.status(500).send(e.message);
     }
 };

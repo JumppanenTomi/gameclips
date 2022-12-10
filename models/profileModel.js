@@ -16,7 +16,7 @@ const getUserProfileById=async (data, res) => {
 
         return combinedJson;
     } catch (e) {
-        console.error("error", e.message);
+        console.error("profile error", e.message);
         res.status(500).send(e.message);
     }
 };

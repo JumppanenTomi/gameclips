@@ -20,6 +20,7 @@ const clipRoutes=require('./routes/clipRoutes');
 const browseRoutes=require('./routes/browseRoutes');
 const commentRoutes=require('./routes/commentRoutes');
 const profileRoutes=require('./routes/profileRoutes');
+const authRoutes=require('./routes/authRoutes');
 
 app.use(cors())
 app.use(express.json()) // for parsing application/json
@@ -35,31 +36,11 @@ app.use(passport.session());
 
 app.use('/static', express.static('public'))
 
-app.get('/', function (req, res) {
-    res.redirect('https://github.com/JumppanenTomi/gameclips-backend/tree/main');
-});
-
 app.use('/clip', clipRoutes);
 app.use('/browse', browseRoutes);
 app.use('/comment', commentRoutes);
 app.use('/profile', profileRoutes);
-
-// modify app.post('/login',...
-app.post(
-    "/login",
-    passport.authenticate("local", { failureRedirect: "/form" }),
-    (req, res) => {
-        console.log("success");
-        res.redirect("/secret");
-    }
-);
-
-app.post('/logout', function (req, res, next) {
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        res.json('logged out');
-    });
-});
+app.use('/auth', authRoutes);
 
 // modify app.get('/secret',...
 app.get("/secret", loggedIn, (req, res) => {

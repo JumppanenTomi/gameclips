@@ -3,14 +3,12 @@ const express=require("express");
 const router=express.Router();
 const controller=require('../controllers/clipController')
 const file=require('../utils/file')
-const fs=require('fs');
-const multer=require('multer');
-const path=require('path');
+const passport=require("../utils/passport");
 
-router.post('/', file.upload, controller.uploadClip);
+router.post('/', passport.authenticate('jwt', { session: false }), file.upload, controller.uploadClip);
+
+router.delete('/', passport.authenticate('jwt', { session: false }), controller.deleteClip)
 
 router.get('/getRandomQuery', controller.getRandomQuery);
-
-router.delete('/', controller.deleteClip)
 
 module.exports=router;

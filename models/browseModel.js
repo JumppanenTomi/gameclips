@@ -8,7 +8,7 @@ const getAll=async (res) => {
         const [rows]=await promisePool.query(sql);
         return rows;
     } catch (e) {
-        console.error("error", e.message);
+        console.error("browse error", e.message);
         res.status(500).send(e.message);
     }
 };
@@ -20,7 +20,7 @@ const search=async (data, res) => {
         const [rows]=await promisePool.query(sql, values);
         return rows;
     } catch (e) {
-        console.error("error", e.message);
+        console.error("browse error", e.message);
         res.status(500).send(e.message);
     }
 };
