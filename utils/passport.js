@@ -14,7 +14,6 @@ passport.use(
         const params=[username];
         try {
             const [user]=await getUserLogin(params);
-            console.log("Local strategy", user); // result is binary row
             if (user===undefined) {
                 return done(null, false, { message: "Incorrect email." });
             }
@@ -34,11 +33,10 @@ passport.use(new JWTStrategy({
 },
     async (jwtPayload, done) => {
         try {
-            console.log('util pass JWT', jwtPayload);
             if (jwtPayload===undefined) {
                 return done(null, false, { message: 'Incorrect Id.' })
             }
-            return done(null, { ...jwtPayload }, { message: 'Some job to do here after coffee break' });
+            return done(null, { ...jwtPayload }, { message: 'Hello' });
         } catch (err) {
             return done(err);
         }

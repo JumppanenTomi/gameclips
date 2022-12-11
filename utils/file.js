@@ -3,6 +3,7 @@ const multer=require('multer');
 const path=require('path');
 
 
+//function to delete any file
 function deleteAsync(file) {
     try {
         fs.unlinkSync(file);
@@ -11,6 +12,8 @@ function deleteAsync(file) {
     }
 }
 
+
+//settings for clip upload
 let upload=multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
@@ -23,12 +26,15 @@ let upload=multer({
         },
     }),
     fileFilter: function (req, file, cb) {
+        //checking if received file actually is video
         var ext=path.extname(file.originalname);
         if (ext!=='.mp4'&&ext!=='.avi') {
             return cb(new Error('Only .mp4 and AVI are supported'))
         }
         cb(null, true)
-    }, limits: { fileSize: 50000000 }
+    }, limits: {
+        fileSize: 50000000 /***file size limited to 50mb*/
+    }
 }).single('clip')
 
 module.exports={

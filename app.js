@@ -12,7 +12,7 @@ const loggedIn=(req, res, next) => {
     if (req.user) {
         next();
     } else {
-        res.redirect("/form");
+        res.redirect("/login");
     }
 };
 
@@ -22,7 +22,7 @@ const commentRoutes=require('./routes/commentRoutes');
 const profileRoutes=require('./routes/profileRoutes');
 const authRoutes=require('./routes/authRoutes');
 
-app.use(cors())
+app.use(cors())//to let clients from different domains access our api
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -42,7 +42,6 @@ app.use('/comment', commentRoutes);
 app.use('/profile', profileRoutes);
 app.use('/auth', authRoutes);
 
-// modify app.get('/secret',...
 app.get("/secret", loggedIn, (req, res) => {
     res.render("secret");
 });

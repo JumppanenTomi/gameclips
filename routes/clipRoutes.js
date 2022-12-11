@@ -5,9 +5,9 @@ const controller=require('../controllers/clipController')
 const file=require('../utils/file')
 const passport=require("../utils/passport");
 
-router.post('/', passport.authenticate('jwt', { session: false }), file.upload, controller.uploadClip);
-
-router.delete('/', passport.authenticate('jwt', { session: false }), controller.deleteClip)
+router
+    .post('/', passport.authenticate('jwt', { session: false }), file.upload, controller.uploadClip)
+    .delete('/', passport.authenticate('jwt', { session: false }), controller.deleteClip);
 
 router.get('/getRandomQuery', controller.getRandomQuery);
 

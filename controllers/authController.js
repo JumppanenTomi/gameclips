@@ -42,6 +42,22 @@ const register=async (req, res, next) => {
     }
 };
 
+const update=async (req, res, next) => {
+    const errors=validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log('user update error', errors);
+        res.send(errors.array());
+    } else {
+        const result=await model.updateUser(user=req.user, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));
+        if (result.insertId) {
+            res.json({ message: `User updated`, user_id: result.insertId });
+        } else {
+            res.status(400).json({ error: 'Update error' });
+        }
+    }
+};
+
 const logout=(req, res) => {
     req.logout(function (err) {
         if (err) { return next(err); }
@@ -54,5 +70,5 @@ const checkToken=(req, res) => {
 };
 
 module.exports={
-    login, checkToken, register, logout,
-};
+    login, checkToken, register, logout, update,
+}
