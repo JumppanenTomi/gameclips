@@ -9,6 +9,7 @@ require('dotenv').config();
 
 const login=(req, res) => {
     passport.authenticate('local', { session: false }, (err, user, info) => {
+        console.log(req.body)
         if (err||!user) {
             return res.status(400).json({
                 message: 'Something is not right',
@@ -28,9 +29,7 @@ const login=(req, res) => {
 
 const register=async (req, res, next) => {
     const errors=validationResult(req);
-
     if (!errors.isEmpty()) {
-        console.log('user create error', errors);
         res.send(errors.array());
     } else {
         const result=await model.addUser(req.body.username, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));

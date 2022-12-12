@@ -5,6 +5,6 @@ const controller=require('../controllers/browseController')
 
 router.get('/', controller.getAll);
 
-router.get('/search', controller.search);
+router.post('/search', controller.search);
 
 module.exports=router;

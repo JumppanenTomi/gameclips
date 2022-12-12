@@ -16,12 +16,6 @@ const loggedIn=(req, res, next) => {
     }
 };
 
-const clipRoutes=require('./routes/clipRoutes');
-const browseRoutes=require('./routes/browseRoutes');
-const commentRoutes=require('./routes/commentRoutes');
-const profileRoutes=require('./routes/profileRoutes');
-const authRoutes=require('./routes/authRoutes');
-
 app.use(cors())//to let clients from different domains access our api
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -33,6 +27,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+const clipRoutes=require('./routes/clipRoutes');
+const browseRoutes=require('./routes/browseRoutes');
+const commentRoutes=require('./routes/commentRoutes');
+const profileRoutes=require('./routes/profileRoutes');
+const authRoutes=require('./routes/authRoutes');
 
 app.use('/static', express.static('public'))
 
