@@ -26,7 +26,7 @@ const uploadClip=async (req, res) => {
 
 const deleteClip=async (req, res) => {
     const user=req.user
-    const data=req.body;
+    const data=req.params;
     res.json(await model.deleteClip(user, data, res));
 };
 

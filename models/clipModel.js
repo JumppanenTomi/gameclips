@@ -16,12 +16,12 @@ const getRandomQuery=async () => {
 
 const uploadClip=async (user, data, file, res) => {
     try {
-        const sql='insert into clips (userId, title, description, url) VALUES (?, ?, ?, ?);';
-        const values=[user.id, data.title, data.desc, file];
+        const sql='insert into clips (userId, title, description, gameId, url) VALUES (?, ?, ?, ?, ?);';
+        const values=[user.id, data.title, data.desc, data.gameId, file];
         const [rows]=await promisePool.query(sql, values);
         return "Successfully uploaded";
     } catch (e) {
-        console.error("clip error", e.message);
+        console.error("clip error", e);
         res.status(500).send(e.message);
     }
 };
@@ -29,6 +29,8 @@ const uploadClip=async (user, data, file, res) => {
 
 const deleteClip=async (user, data, res) => {
     try {
+        console.log(user.id)
+        console.log(data.id)
         //getting clip url so we know which file to delete...
         let sql='SELECT * FROM clips WHERE id=? and userId=?;'
         const values=[data.id, user.id];

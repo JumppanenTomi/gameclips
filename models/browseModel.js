@@ -4,7 +4,18 @@ const promisePool=pool.promise();
 
 const getAll=async (res) => {
     try {
-        const sql='SELECT id, name FROM games';
+        const sql='SELECT id, name FROM games ORDER BY name;';
+        const [rows]=await promisePool.query(sql);
+        return rows;
+    } catch (e) {
+        console.error("browse error", e.message);
+        res.status(500).send(e.message);
+    }
+};
+
+const getAllWithClips=async (res) => {
+    try {
+        const sql='SELECT games.id, games.name FROM games, clips where games.id = clips.gameId GROUP BY games.id;';
         const [rows]=await promisePool.query(sql);
         return rows;
     } catch (e) {
@@ -25,4 +36,4 @@ const search=async (data, res) => {
     }
 };
 
-module.exports={ getAll, search };
+module.exports={ getAll, search, getAllWithClips };
