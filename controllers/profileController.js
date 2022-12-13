@@ -2,7 +2,7 @@
 const model=require('../models/profileModel')
 
 const getUserProfileById=async (req, res) => {
-    const data=req.body
+    const data=req.params
     res.json(await model.getUserProfileById(data, res));
 };
 

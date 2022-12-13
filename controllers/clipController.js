@@ -7,6 +7,10 @@ const getRandomQuery=async (req, res) => {
     res.json(await model.getRandomQuery(res));
 };
 
+const getByGameId=async (req, res) => {
+    res.json(await model.getByGameId(req.params.id, res));
+};
+
 const uploadClip=async (req, res) => {
     const user=req.user
     const data=req.body
@@ -31,5 +35,5 @@ const deleteClip=async (req, res) => {
 };
 
 module.exports={
-    getRandomQuery, uploadClip, deleteClip,
-};
+    getRandomQuery, uploadClip, deleteClip, getByGameId,
+}

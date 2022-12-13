@@ -11,4 +11,6 @@ router
 
 router.get('/getRandomQuery', controller.getRandomQuery);
 
+router.get('/getByGameId/:id', controller.getByGameId);
+
 module.exports=router;
