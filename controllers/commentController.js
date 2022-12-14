@@ -15,7 +15,7 @@ const getCommentsByUserId=async (req, res) => {
 
 const addCommentToClipById=async (req, res) => {
     const user=req.user;
-    const data=req.body;
+    const data=req.params;
     const response=await model.addCommentToClipById(user, data, res);
     res.json(response);
 };
