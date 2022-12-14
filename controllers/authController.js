@@ -9,8 +9,8 @@ require('dotenv').config();
 
 const login=(req, res) => {
     passport.authenticate('local', { session: false }, (err, user, info) => {
-        console.log(req.body)
-        if (err||!user) {
+        if (err||!user) {//if there was error we inform about it
+            console.log(err);
             return res.status(400).json({
                 message: 'Something is not right',
                 user: user
@@ -30,14 +30,14 @@ const login=(req, res) => {
 const register=async (req, res, next) => {
     const errors=validationResult(req);
     if (!errors.isEmpty()) {
-        res.send(errors.array());
+        res.send(errors.array());//if there was incorrect pass,username,email we tell it to client
     } else {
-        const result=await model.addUser(req.body.username, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));
-        console.log(result.insertId)
+        const result=await model.addUser(req.body.username, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));//trying to insert email, username and salted pass to db
         if (result.insertId) {
-            res.json(true);
+            res.json(true);//if it successful we send "true" to clien
         } else {
-            res.status(400).json({ error: 'register error' });
+            console.log(result)
+            res.status(400).json({ error: 'Error' });//if failed to insert into database we inform that
         }
     }
 };
@@ -46,14 +46,13 @@ const update=async (req, res, next) => {
     const errors=validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log('user update error', errors);
-        res.send(errors.array());
+        res.send(errors.array());//if there was incorrect pass,email we tell it to client
     } else {
-        const result=await model.updateUser(user=req.user, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));
+        const result=await model.updateUser(user=req.user, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));//trying to insert email and salted pass to db
         if (result.insertId) {
-            res.json({ message: `User updated`, user_id: result.insertId });
+            res.json(true);//if it successful we send "true" to clien
         } else {
-            res.status(400).json({ error: 'Update error' });
+            res.status(400).json({ error: 'Error' });//if failed to insert into database we inform that
         }
     }
 };
@@ -66,7 +65,7 @@ const logout=(req, res) => {
 };
 
 const checkToken=(req, res) => {
-    res.json({ user: req.user });
+    res.json({ user: req.user });//decoding token and then sending it
 };
 
 module.exports={

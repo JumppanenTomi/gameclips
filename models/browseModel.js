@@ -4,7 +4,7 @@ const promisePool=pool.promise();
 
 const getAll=async (res) => {
     try {
-        const sql='SELECT id, name FROM games ORDER BY name;';
+        const sql='SELECT id, name FROM games ORDER BY name;';//gets list of all games
         const [rows]=await promisePool.query(sql);
         return rows;
     } catch (e) {
@@ -15,7 +15,7 @@ const getAll=async (res) => {
 
 const getAllWithClips=async (res) => {
     try {
-        const sql='SELECT games.id, games.name FROM games, clips where games.id = clips.gameId GROUP BY games.id;';
+        const sql='SELECT games.id, games.name FROM games, clips where games.id = clips.gameId GROUP BY games.id;';//gets list of all games that have posted videos
         const [rows]=await promisePool.query(sql);
         return rows;
     } catch (e) {
@@ -26,7 +26,7 @@ const getAllWithClips=async (res) => {
 
 const search=async (data, res) => {
     try {
-        const sql="SELECT * FROM games WHERE name LIKE ?;";
+        const sql="SELECT * FROM games WHERE name LIKE ?;";//game search engine route
         const values=["%"+data.term+"%"];
         const [rows]=await promisePool.query(sql, values);
         return rows;

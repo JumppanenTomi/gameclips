@@ -4,11 +4,11 @@ const promisePool=pool.promise();
 
 const getUserProfileById=async (data, res) => {
     try {
-        let sql='SELECT id, username FROM users WHERE id = ?;';
+        let sql='SELECT id, username FROM users WHERE id = ?;';//to get users profile
         const values=[data.id];
         const [rowsUser]=await promisePool.query(sql, values);
 
-        sql='SELECT id, title, description, url FROM clips WHERE userId = ?;';
+        sql='SELECT id, title, description, url FROM clips WHERE userId = ?;';//to get users clips
         const [rowsClips]=await promisePool.query(sql, values);
 
         let [combinedJson]=rowsUser;

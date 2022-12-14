@@ -5,7 +5,7 @@ const file=require('../utils/file')
 
 const getRandomQuery=async (res) => {
     try {
-        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId ORDER BY RAND()';
+        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId ORDER BY RAND()';//get all clips in random order
         const [rows]=await promisePool.query(sql)
         return rows;
     } catch (e) {
@@ -16,7 +16,7 @@ const getRandomQuery=async (res) => {
 
 const getByGameId=async (id, res) => {
     try {
-        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId AND clips.gameId = ? ORDER BY RAND();';
+        const sql='SELECT users.username, clips.id, clips.title, clips.description, clips.url FROM users, clips WHERE users.id = clips.userId AND clips.gameId = ? ORDER BY RAND();';//get all clips of specific game in random order
         const values=[id]
         const [rows]=await promisePool.query(sql, values)
         return rows;
@@ -28,7 +28,7 @@ const getByGameId=async (id, res) => {
 
 const uploadClip=async (user, data, file, res) => {
     try {
-        const sql='insert into clips (userId, title, description, gameId, url) VALUES (?, ?, ?, ?, ?);';
+        const sql='insert into clips (userId, title, description, gameId, url) VALUES (?, ?, ?, ?, ?);';//post clip
         const values=[user.id, data.title, data.desc, data.gameId, file];
         const [rows]=await promisePool.query(sql, values);
         return "Successfully uploaded";
@@ -58,6 +58,7 @@ const deleteClip=async (user, data, res) => {
         sql='DELETE FROM clips WHERE id=? and userId=?;';
         const [rowsFinal]=await promisePool.query(sql, values);
 
+        //if all good we can return following
         if (rowsFinal.affectedRows>0) {
             return "Clip, comments, likes, favorites deleted";
         } else {

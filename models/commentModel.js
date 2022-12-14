@@ -4,7 +4,7 @@ const promisePool=pool.promise();
 
 const getCommentsByClipId=async (data, res) => {
     try {
-        const sql='SELECT comments.comment, users.username FROM comments, users WHERE comments.userId = users.id AND comments.clipId = ?;';
+        const sql='SELECT comments.comment, users.username FROM comments, users WHERE comments.userId = users.id AND comments.clipId = ?;';//to get comments posted to specific clip
         const values=[data.id]
         const [rows]=await promisePool.query(sql, values);
         return rows;
@@ -16,7 +16,7 @@ const getCommentsByClipId=async (data, res) => {
 
 const getCommentsByUserId=async (user, res) => {
     try {
-        const sql='SELECT comments.comment, users.username FROM comments, users WHERE comments.userId = ?';
+        const sql='SELECT comments.comment, users.username FROM comments, users WHERE comments.userId = ?';//to get comments posted by this user
         const values=[user.id]
         const [rows]=await promisePool.query(sql, values);
         return rows;
@@ -28,7 +28,7 @@ const getCommentsByUserId=async (user, res) => {
 
 const addCommentToClipById=async (user, data, res) => {
     try {
-        const sql='insert into comments (comment, userId, clipId) VALUES (?, ?, ?);';
+        const sql='insert into comments (comment, userId, clipId) VALUES (?, ?, ?);';//to add comment to clip
         const values=[data.comment, user.id, data.id];
         const [rows]=await promisePool.query(sql, values);
         return "Comment posted";
@@ -40,7 +40,7 @@ const addCommentToClipById=async (user, data, res) => {
 
 const deleteCommentByCommentId=async (user, data, res) => {
     try {
-        const sql='DELETE FROM comments WHERE id=? and userId=?;';
+        const sql='DELETE FROM comments WHERE id=? and userId=?;';//to delete comment
         const values=[data.id, user.id];
         const [rows]=await promisePool.query(sql, values);
         if (rows.affectedRows>0) {
@@ -56,7 +56,7 @@ const deleteCommentByCommentId=async (user, data, res) => {
 
 const modifyCommentByCommentId=async (user, data, res) => {
     try {
-        const sql='update comments set comment = ? where id = ? and userId = ?';
+        const sql='update comments set comment = ? where id = ? and userId = ?';//to modify comment
         const values=[data.comment, data.id, user.id];
         const [rows]=await promisePool.query(sql, values);
         if (rows.affectedRows>0) {

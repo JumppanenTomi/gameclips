@@ -4,7 +4,7 @@ const promisePool=pool.promise();
 
 const getUserLogin=async (data) => {
     try {
-        const [rows]=await promisePool.execute('SELECT * FROM users WHERE email = ?;', data);
+        const [rows]=await promisePool.execute('SELECT * FROM users WHERE email = ?;', data);//for login
         return rows;
     } catch (e) {
         console.log(e.message);
@@ -13,7 +13,7 @@ const getUserLogin=async (data) => {
 
 const addUser=async (username, email, password) => {
     try {
-        const [rows]=await promisePool.query("INSERT INTO users(username, email, password) VALUES(?, ?, ?);",
+        const [rows]=await promisePool.query("INSERT INTO users(username, email, password) VALUES(?, ?, ?);",//for registering
             [username, email, password]);
         return rows;
     } catch (e) {
@@ -22,6 +22,7 @@ const addUser=async (username, email, password) => {
     }
 };
 
+//to update user
 const updateUser=async (user, email, password) => {
     try {
         if (email!=""&&password=="") {

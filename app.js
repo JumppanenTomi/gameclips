@@ -12,6 +12,8 @@ app.use(cors())//to let clients from different domains access our api
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+
+//setting things up for authentication
 app.use(session({
     secret: process.env.JWT_SECRET,
     resave: true,
@@ -20,14 +22,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+//defining routes scripts
 const clipRoutes=require('./routes/clipRoutes');
 const browseRoutes=require('./routes/browseRoutes');
 const commentRoutes=require('./routes/commentRoutes');
 const profileRoutes=require('./routes/profileRoutes');
 const authRoutes=require('./routes/authRoutes');
 
-app.use('/static', express.static('public'))//serve folder that holds clips
-
+//serve folder that holds clips
+app.use('/static', express.static('public'))
 
 //routes
 app.use('/clip', clipRoutes);

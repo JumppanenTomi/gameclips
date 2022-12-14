@@ -33,7 +33,7 @@ let upload=multer({
         }
         cb(null, true)
     }, limits: {
-        fileSize: 60000000 /***file size limited to 60mb*/
+        fileSize: 100000000 /***file size limited to 100mb*/
     }
 }).single('clip')
 
