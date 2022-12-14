@@ -4,7 +4,7 @@ const router=express.Router();
 const controller=require('../controllers/commentController')
 const passport=require("../utils/passport");
 
-router.get('/clip', controller.getCommentsByClipId);
+router.get('/clip:id', controller.getCommentsByClipId);
 
 router.get('/user', passport.authenticate('jwt', { session: false }), controller.getCommentsByUserId);
 

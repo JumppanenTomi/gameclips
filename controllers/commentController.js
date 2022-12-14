@@ -4,7 +4,7 @@ const badWords=require('bad-words'),
     propaganda=new badWords();
 
 const getCommentsByClipId=async (req, res) => {
-    const data=req.body
+    const data=req.params
     const response=await model.getCommentsByClipId(data, res);
     res.json(response);
 };
