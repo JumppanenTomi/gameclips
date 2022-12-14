@@ -33,6 +33,7 @@ const register=async (req, res, next) => {
         res.send(errors.array());
     } else {
         const result=await model.addUser(req.body.username, req.body.email, bcryptjs.hashSync(String(req.body.password), salt));
+        console.log(result.insertId)
         if (result.insertId) {
             res.json(true);
         } else {

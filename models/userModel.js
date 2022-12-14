@@ -9,7 +9,7 @@ const getUserLogin=async (data) => {
     } catch (e) {
         console.log(e.message);
     }
-};
+}; 
 
 const addUser=async (username, email, password) => {
     try {
@@ -18,7 +18,7 @@ const addUser=async (username, email, password) => {
         return rows;
     } catch (e) {
         console.log(e);
-        return 0;
+        return 0; 
     }
 };
 
