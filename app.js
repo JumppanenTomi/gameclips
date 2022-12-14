@@ -26,8 +26,10 @@ const commentRoutes=require('./routes/commentRoutes');
 const profileRoutes=require('./routes/profileRoutes');
 const authRoutes=require('./routes/authRoutes');
 
-app.use('/static', express.static('public'))
+app.use('/static', express.static('public'))//serve folder that holds clips
 
+
+//routes
 app.use('/clip', clipRoutes);
 app.use('/browse', browseRoutes);
 app.use('/comment', commentRoutes);

@@ -29,7 +29,7 @@ let upload=multer({
         //checking if received file actually is video
         var ext=path.extname(file.originalname);
         if (ext!=='.mp4'&&ext!=='.avi') {
-            return cb(new Error('Only .mp4 and AVI are supported'))
+            return cb(new Error('Only .mp4 is supported'))
         }
         cb(null, true)
     }, limits: {
