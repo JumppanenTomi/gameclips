@@ -54,14 +54,6 @@ const deleteClip=async (user, data, res) => {
         const deleteValues=[data.id];
         const [rows2]=await promisePool.query(sql, deleteValues);
 
-        //deleting all likes that are depending on this clip
-        sql='DELETE FROM likes WHERE clipId=?;'
-        const [rows3]=await promisePool.query(sql, deleteValues);
-
-        //deleting all favorites that are depending on this clip
-        sql='DELETE FROM favorites WHERE clipId=?;'
-        const [rows4]=await promisePool.query(sql, deleteValues);
-
         //and lastly deleting rest data of clip it self
         sql='DELETE FROM clips WHERE id=? and userId=?;';
         const [rowsFinal]=await promisePool.query(sql, values);
