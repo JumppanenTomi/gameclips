@@ -8,14 +8,6 @@ require('dotenv').config();
 
 const port=3000;
 
-const loggedIn=(req, res, next) => {
-    if (req.user) {
-        next();
-    } else {
-        res.redirect("/login");
-    }
-};
-
 app.use(cors())//to let clients from different domains access our api
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -41,10 +33,6 @@ app.use('/browse', browseRoutes);
 app.use('/comment', commentRoutes);
 app.use('/profile', profileRoutes);
 app.use('/auth', authRoutes);
-
-app.get("/secret", loggedIn, (req, res) => {
-    res.render("secret");
-});
 
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
